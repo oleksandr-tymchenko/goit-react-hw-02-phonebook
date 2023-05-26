@@ -1,21 +1,30 @@
-import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
+import { ContactsCont, BtnDel, Name } from './ContactListStyled';
 
 export default function ContactList({ contacts, onDeleteContact }) {
   return (
-    <ul>
+    <ContactsCont>
       {contacts.map(({ id, name, number }) => {
-        {
-          /* const id = nanoid(); */
-        }
         return (
           <li key={id}>
             <p>
-              {name}: {number}
-              <button onClick={() => onDeleteContact(id)}>Delete</button>
+              <Name>{name}</Name> : {number}
+              <BtnDel onClick={() => onDeleteContact(id)}>Delete</BtnDel>
             </p>
           </li>
         );
       })}
-    </ul>
+    </ContactsCont>
   );
 }
+
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  onDeleteContact: PropTypes.func,
+};

@@ -1,5 +1,7 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import PropTypes from 'prop-types';
+import { Formik, Form } from 'formik';
 import * as yup from 'yup';
+import { FormCont, Label, Btn, Input, ErrMessage } from './ContactForm.styled';
 
 const schema = yup.object().shape({
   name: yup
@@ -31,20 +33,22 @@ export default function ContactForm({ data }) {
       validationSchema={schema}
     >
       <Form autoComplete="off">
-        <label htmlFor="name">
-          Name
-          <Field type="text" name="name" placeholder="Jacob Mercer" />
-          <ErrorMessage name="name" component="div" />
-        </label>
-        <br />
-        <label htmlFor="number">
-          Number
-          <Field type="tel" name="number" />
-          <ErrorMessage name="number" component="div" />
-        </label>
+        <FormCont>
+          <Label htmlFor="name">Name</Label>
+          <Input type="text" name="name" placeholder="Jacob Mercer" />
+          <ErrMessage name="name" component="div" />
 
-        <button type="submit">Add Contact</button>
+          <Label htmlFor="number">Number</Label>
+
+          <Input type="tel" name="number" placeholder="080-111-77-55" />
+          <ErrMessage name="number" component="div" />
+          <Btn type="submit">add contact</Btn>
+        </FormCont>
       </Form>
     </Formik>
   );
 }
+
+ContactForm.propTypes = {
+  data: PropTypes.func,
+};

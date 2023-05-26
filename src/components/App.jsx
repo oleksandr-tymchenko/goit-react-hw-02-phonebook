@@ -6,8 +6,8 @@ import { nanoid } from 'nanoid';
 
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
+import { Container, Title1, Title2 } from './App.styled';
 
-let updateContacts = [];
 class App extends Component {
   state = {
     contacts: [],
@@ -15,12 +15,17 @@ class App extends Component {
   };
 
   handleSubmit = (values, { resetForm }) => {
-    const id = nanoid();
-    values.id = id;
-    updateContacts.push(values);
+    const { contacts } = this.state;
+    values.id = nanoid();
 
-    this.setState({ contacts: updateContacts });
-    console.log(this.state.contacts);
+    if (contacts.find(contact => contact.name === values.name)) {
+      alert(`${values.name} is already in contacts`);
+    } else {
+      this.setState(prewState => ({
+        contacts: [...contacts, values],
+      }));
+    }
+
     resetForm();
   };
 
@@ -32,8 +37,6 @@ class App extends Component {
     this.setState(prewState => ({
       contacts: prewState.contacts.filter(contact => contact.id !== contactId),
     }));
-    // updateContacts = this.state.contacts;
-    // console.log(updateContacts);
   };
 
   render() {
@@ -44,16 +47,16 @@ class App extends Component {
       contact.name.toLowerCase().includes(normalizedFilter)
     );
     return (
-      <div className="Container">
-        <h1>Phonebook</h1>
+      <Container>
+        <Title1>Phonebook</Title1>
         <ContactForm data={this.handleSubmit} />
-        <h2>Contacts</h2>
+        <Title2>Contacts</Title2>
         <Filter value={filter} onSearch={this.onSearchValue} />
         <ContactList
           contacts={visibleContacts}
           onDeleteContact={this.deleteContact}
         />
-      </div>
+      </Container>
     );
   }
 }
