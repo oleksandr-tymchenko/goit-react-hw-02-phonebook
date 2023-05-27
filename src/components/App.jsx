@@ -14,17 +14,22 @@ class App extends Component {
     filter: '',
   };
 
+  existedContact = ({ contacts }, values) => {
+    contacts.find(contact => contact.name === values.name);
+  };
+
   handleSubmit = (values, { resetForm }) => {
     const { contacts } = this.state;
     values.id = nanoid();
 
-    if (contacts.find(contact => contact.name === values.name)) {
+    if (this.existedContact()) {
       alert(`${values.name} is already in contacts`);
-    } else {
-      this.setState(prewState => ({
-        contacts: [...contacts, values],
-      }));
+      return;
     }
+
+    this.setState(prewState => ({
+      contacts: [...contacts, values],
+    }));
 
     resetForm();
   };
@@ -39,13 +44,18 @@ class App extends Component {
     }));
   };
 
-  render() {
-    const { contacts, filter } = this.state;
-
+  getVisibleContacts({ contacts, filter }) {
     const normalizedFilter = filter.toLowerCase();
-    const visibleContacts = contacts.filter(contact =>
+    return contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
+  }
+
+  render() {
+    const { filter } = this.state;
+
+    const visibleContacts = this.getVisibleContacts();
+
     return (
       <Container>
         <Title1>Phonebook</Title1>
