@@ -8,7 +8,7 @@ export default function ContactList({ contacts, onDeleteContact }) {
         return (
           <li key={id}>
             <p>
-              <Name>{name}</Name> : {number}
+              <Name>{name}</Name>: {number}
               <BtnDel onClick={() => onDeleteContact(id)}>Delete</BtnDel>
             </p>
           </li>

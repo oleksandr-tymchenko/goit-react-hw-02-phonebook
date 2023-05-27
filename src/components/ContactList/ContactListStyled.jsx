@@ -3,13 +3,14 @@ import styled from '@emotion/styled';
 export const ContactsCont = styled.ul`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
 
-  width: ${props => props.theme.spacing(120)};
+  width: ${props => props.theme.spacing(110)};
   border: 1px solid #848b60;
   border-radius: ${props => props.theme.spacing(3)};
   box-shadow: ${({ theme }) => theme.shadows.small};
 
+  padding-left: 40px;
   padding-top: 10px;
   margin-top: 20px;
   margin-left: auto;
