@@ -19,6 +19,7 @@ class App extends Component {
   };
 
   handleSubmit = (values, { resetForm }) => {
+    // e.preventDefault();
     const { contacts } = this.state;
     values.id = nanoid();
 
@@ -54,13 +55,19 @@ class App extends Component {
   // /----------------------
   componentDidMount() {
     console.log('App componentDidMount');
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
   }
   componentDidUpdate(prevProps, prevState) {
     console.log('App componentUpdateMount');
-    console.log(prevState);
-    console.log(this.state);
+
     if (this.state.contacts !== prevState.contacts) {
       console.log('update contacts');
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
   }
 
