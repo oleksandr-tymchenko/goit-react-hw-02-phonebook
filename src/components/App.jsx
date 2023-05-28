@@ -59,6 +59,9 @@ class App extends Component {
     console.log('App componentUpdateMount');
     console.log(prevState);
     console.log(this.state);
+    if (this.state.contacts !== prevState.contacts) {
+      console.log('update contacts');
+    }
   }
 
   //  --------------------------------

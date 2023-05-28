@@ -35,12 +35,17 @@ export default function ContactForm({ data }) {
       <Form autoComplete="off">
         <FormCont>
           <Label htmlFor="name">Name</Label>
-          <Input type="text" name="name" placeholder="Jacob Mercer" />
+          <Input type="text" name="name" id="name" placeholder="Jacob Mercer" />
           <ErrMessage name="name" component="div" />
 
           <Label htmlFor="number">Number</Label>
 
-          <Input type="tel" name="number" placeholder="080-111-77-55" />
+          <Input
+            type="tel"
+            name="number"
+            id="number"
+            placeholder="080-111-77-55"
+          />
           <ErrMessage name="number" component="div" />
           <Btn type="submit">add contact</Btn>
         </FormCont>

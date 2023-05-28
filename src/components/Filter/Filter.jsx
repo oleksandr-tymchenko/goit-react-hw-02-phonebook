@@ -8,6 +8,7 @@ export default function Filter({ value, onSearch }) {
       <Input
         type="text"
         value={value}
+        id="filter"
         onChange={onSearch}
         placeholder="Jacob Mercer"
       />
