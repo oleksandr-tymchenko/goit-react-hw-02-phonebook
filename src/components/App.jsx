@@ -22,7 +22,7 @@ class App extends Component {
     const { contacts } = this.state;
     values.id = nanoid();
 
-    if (this.existedContact()) {
+    if (this.existedContact({ contacts }, values)) {
       alert(`${values.name} is already in contacts`);
       return;
     }
@@ -51,8 +51,21 @@ class App extends Component {
       contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
+  // /----------------------
+  componentDidMount() {
+    console.log('App componentDidMount');
+  }
+  componentDidUpdate(prevProps, prevState) {
+    console.log('App componentUpdateMount');
+    console.log(prevState);
+    console.log(this.state);
+  }
 
+  //  --------------------------------
   render() {
+    // ------------------------
+    console.log('App render');
+    // ------------------------------
     const { filter } = this.state;
 
     const visibleContacts = this.getVisibleContacts();
