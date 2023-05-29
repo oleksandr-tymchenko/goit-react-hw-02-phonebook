@@ -19,7 +19,7 @@ class App extends Component {
   };
 
   handleSubmit = (values, { resetForm }) => {
-    // e.preventDefault();
+  
     const { contacts } = this.state;
     values.id = nanoid();
 
